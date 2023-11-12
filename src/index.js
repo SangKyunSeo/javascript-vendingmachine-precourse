@@ -1,5 +1,4 @@
 import PrintManageProduct from './printManageProduct.js'
-
 export const app = document.getElementById('app');
 const printManageProduct = new PrintManageProduct();
 
@@ -47,8 +46,13 @@ class Common{
 
 const common = new Common();
 common.generateCommonTab();
-
+window.onload = () => {
+    if(localStorage.getItem('isGenerateManageProductSection') === 'true'){
+        localStorage.setItem('isGenerateManageProductSection', false);
+    }
+}
 document.querySelector('#product-purchase-menu').addEventListener('click',()=>{
     printManageProduct.appendManageProduct();
 });
+
 

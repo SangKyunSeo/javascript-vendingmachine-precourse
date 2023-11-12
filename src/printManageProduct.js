@@ -1,4 +1,7 @@
 import {app} from './index.js'
+import PrintProductList from './printProductList.js'
+
+const printProductList  = new PrintProductList();
 
 export default class PrintManageProduct{
 
@@ -7,6 +10,14 @@ export default class PrintManageProduct{
         const manageProductSection = document.createElement('div');
         manageProductSection.id = 'product-manage-section';
         return manageProductSection;
+    }
+
+    // 상품추가 헤더 요소 생성
+    generateManageProductHeader(){
+        const manageProductHeader = document.createElement('h1');
+        const textNode = document.createTextNode('상품 추가하기');
+        manageProductHeader.appendChild(textNode);
+        return manageProductHeader;
     }
 
     // 상품 정보 입력 폼 요소 생성
@@ -64,7 +75,10 @@ export default class PrintManageProduct{
     appendManageProductSection(){
         let manageProductSection = this.generateManageProductSecion();
         let manageProductForm = this.generateManageProductForm();
+        let manageProductHeader = this.generateManageProductHeader();
+
         app.appendChild(manageProductSection);
+        manageProductSection.appendChild(manageProductHeader);
         manageProductSection.appendChild(manageProductForm);
         this.saveLocalStorageOfManageProductState();
         return manageProductForm;
@@ -74,11 +88,19 @@ export default class PrintManageProduct{
     appendManageProduct(){
         if(!this.checkGeneratedManageProduct()){
             let manageProductForm = this.appendManageProductSection();
+            let printProductListSection = printProductList.generateManageProductStruct();
             manageProductForm.appendChild(this.generateInputProductName());
             manageProductForm.appendChild(this.generateInputProductPrice());
             manageProductForm.appendChild(this.generateInputProductAmount());
             manageProductForm.appendChild(this.generateSubmitProductAddButton());
+            app.appendChild(printProductListSection);
         }
     }
 }
+
+
+
+
+
+
 

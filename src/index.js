@@ -4,11 +4,13 @@ import {manageContent} from './printManageProduct.js'
 import {chargeContent} from './printInputCharge.js'
 import PrintInputCharge from './printInputCharge.js'
 import ViewState from './viewState.js'
+import PrintChargeCoinState from './printChargeCoinState.js'
 
 export const app = document.getElementById('app');
 const printManageProduct = new PrintManageProduct();
 const printInputCharge = new PrintInputCharge();
 const viewState = new ViewState();
+const printChargeCoinState = new PrintChargeCoinState();
 
 let textNode = '';
 
@@ -85,7 +87,7 @@ document.querySelector('#vending-machine-manage-menu').addEventListener('click',
         printInputCharge.generateInputChargeElements();
         printInputCharge.generateHaveAmountElements();
         viewState.chargeMoneyViewState();
-        
+        // printChargeCoinState.printCurrentChargeCoin();
     }
 });
 

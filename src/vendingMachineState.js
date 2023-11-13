@@ -15,6 +15,10 @@ export default class VendingMachineState{
     // 자판기에 동전 합산
     addCoin(mapValue){
         let hadCoin = this.getHaveCoin();
+        let keyArr = Arrays.hadCoin.keys().reverse();
+        for(let key of keyArr){
+            console.log(key);
+        }
         if(hadCoin === 0){
             // 자판기에 동전이 없을 경우
             localStorage.setItem('chargeCoins',JSON.stringify(Object.fromEntries(mapValue)));
@@ -75,6 +79,8 @@ export default class VendingMachineState{
             // 화면에 보유 금액 및 잔돈 그리기
             document.querySelector(id).innerHTML = '';
             document.querySelector(id).append('보유금액 :' , this.getHaveAmount());
+            // 잔돈 보유 현황 그리기
+
         }
     }
 }

@@ -42,5 +42,20 @@ export default class PrintUtil{
         return tableTh;
     }
 
+    // table tbody 요소 생성
+    generateTbody(name){
+        const tableBody = document.createElement('tbody');
+        tableBody.className = name;
+        return tableBody;
+    }
+    
+    // table td 요소 생성
+    generateTd(value){
+        const tableTd = document.createElement('td');
+        const textNode = document.createTextNode(value);
+        tableTd.appendChild(textNode);
+        return tableTd;
+    }
+
 
 }

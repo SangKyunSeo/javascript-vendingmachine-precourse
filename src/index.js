@@ -1,4 +1,7 @@
 import PrintManageProduct from './printManageProduct.js'
+import TabState from './tabState.js'
+
+
 export const app = document.getElementById('app');
 const printManageProduct = new PrintManageProduct();
 
@@ -45,14 +48,30 @@ class Common{
 }
 
 const common = new Common();
+const tabState = new TabState();
 common.generateCommonTab();
+
+// 윈도우가 load 될 경우 해당 탭이 눌러져있었던 경우 다시 그리기
 window.onload = () => {
-    if(localStorage.getItem('isGenerateManageProductSection') === 'true'){
-        localStorage.setItem('isGenerateManageProductSection', false);
+    localStorage.setItem('isGenerateManageProductSection', false);
+    if(localStorage.getItem('productManageTab') === 'true'){
+        printManageProduct.appendManageProduct();
     }
 }
+
 document.querySelector('#product-purchase-menu').addEventListener('click',()=>{
-    printManageProduct.appendManageProduct();
+    tabState.productManageEvent();
+    if(localStorage.getItem('productManageTab') === 'true'){
+        printManageProduct.appendManageProduct();
+        
+    }
 });
 
+document.querySelector('#vending-machine-manage-menu').addEventListener('click', ()=>{
+    tabState.chargeMoneyEvent();
+});
+
+document.querySelector('#product-add-menu').addEventListener('click', ()=>{
+    tabState.purchaseProductEvent();
+});
 

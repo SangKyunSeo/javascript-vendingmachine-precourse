@@ -1,7 +1,9 @@
 import {app} from './index.js'
 import PrintProductList from './printProductList.js'
+import AddProductList from './addProductList.js'
 
 const printProductList  = new PrintProductList();
+const addProductList = new AddProductList();
 
 export default class PrintManageProduct{
 
@@ -93,6 +95,11 @@ export default class PrintManageProduct{
             manageProductForm.appendChild(this.generateInputProductPrice());
             manageProductForm.appendChild(this.generateInputProductAmount());
             manageProductForm.appendChild(this.generateSubmitProductAddButton());
+            document.querySelector('#product-add-button').addEventListener('click',(event)=>{
+                event.preventDefault();
+                addProductList.addProduct('#product-name-input', '#product-price-input', '#product-quantity-input');
+                printProductList.generateAddedProductTable('#product-name-input', '#product-price-input', '#product-quantity-input');
+            });
             app.appendChild(printProductListSection);
         }
     }

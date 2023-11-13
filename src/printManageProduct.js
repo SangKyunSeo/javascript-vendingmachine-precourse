@@ -1,10 +1,12 @@
 import {app} from './index.js'
 import PrintProductList from './printProductList.js'
 import AddProductList from './addProductList.js'
+import PrintUtil from './printUtil.js'
 
 const printProductList  = new PrintProductList();
 const addProductList = new AddProductList();
-
+const printUtil = new PrintUtil();
+export const manageContent = printUtil.generateDiv('manage-content');
 export default class PrintManageProduct{
 
     // 상품 관리에 대한 부분을 감싸는 div 요소 생성
@@ -40,6 +42,7 @@ export default class PrintManageProduct{
     // 상품 가격 입력 요소 생성
     generateInputProductPrice(){
         const inputProductPrice = document.createElement('input');
+        inputProductPrice.type = 'number';
         inputProductPrice.id = 'product-price-input';
         inputProductPrice.placeholder = '가격';
         return inputProductPrice;
@@ -48,6 +51,7 @@ export default class PrintManageProduct{
     // 상품 수량 입력 요소 생성
     generateInputProductAmount(){
         const inputProductQuantity = document.createElement('input');
+        inputProductQuantity.type = 'number';
         inputProductQuantity.id = 'product-quantity-input';
         inputProductQuantity.placeholder = '수량';
         return inputProductQuantity;
@@ -79,7 +83,8 @@ export default class PrintManageProduct{
         let manageProductForm = this.generateManageProductForm();
         let manageProductHeader = this.generateManageProductHeader();
 
-        app.appendChild(manageProductSection);
+        app.appendChild(manageContent);
+        manageContent.appendChild(manageProductSection);
         manageProductSection.appendChild(manageProductHeader);
         manageProductSection.appendChild(manageProductForm);
         this.saveLocalStorageOfManageProductState();
@@ -100,7 +105,7 @@ export default class PrintManageProduct{
                 addProductList.addProduct('#product-name-input', '#product-price-input', '#product-quantity-input');
                 printProductList.generateAddedProductTable('#product-name-input', '#product-price-input', '#product-quantity-input');
             });
-            app.appendChild(printProductListSection);
+            manageContent.appendChild(printProductListSection);
         }
     }
 }

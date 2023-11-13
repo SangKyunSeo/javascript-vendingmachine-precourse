@@ -15,6 +15,39 @@ export default class PrintUtil{
         return headerElement;
     }
 
+    // input text 요소 생성
+    generateInputText(text, id){
+        const inputElement = document.createElement('input');
+        inputElement.placeholder = text;
+        inputElement.id = id;
+        return inputElement;
+    }
+
+    // input number 요소 생성
+    generateInputNumber(text, id){
+        const inputElement = document.createElement('input');
+        inputElement.placeholder = text;
+        inputElement.id = id;
+        inputElement.type = 'number';
+        return inputElement;
+    }
+
+    // button 요소 생성
+    generateButton(text, id){
+        const buttonElement = document.createElement('button');
+        const textNode = document.createTextNode(text);
+        buttonElement.appendChild(textNode);
+        buttonElement.id = id;
+        return buttonElement;
+    }
+
+    // span 요소 생성
+    generateSpan(id){
+        const spanElement = document.createElement('span');
+        spanElement.id = id;
+        return spanElement;
+    }
+
     // table 요소 생성
     generateTable(name){
         const tableElement = document.createElement('table');

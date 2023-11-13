@@ -1,9 +1,14 @@
 import PrintManageProduct from './printManageProduct.js'
 import TabState from './tabState.js'
-
+import {manageContent} from './printManageProduct.js'
+import {chargeContent} from './printInputCharge.js'
+import PrintInputCharge from './printInputCharge.js'
+import ViewState from './viewState.js'
 
 export const app = document.getElementById('app');
 const printManageProduct = new PrintManageProduct();
+const printInputCharge = new PrintInputCharge();
+const viewState = new ViewState();
 
 let textNode = '';
 
@@ -56,21 +61,35 @@ window.onload = () => {
     localStorage.setItem('isGenerateManageProductSection', false);
     if(localStorage.getItem('productManageTab') === 'true'){
         printManageProduct.appendManageProduct();
+    }else if(localStorage.getItem('chargeMoneyTab') === 'true'){
+        printInputCharge.generateInputChargeElements();
+        printInputCharge.generateHaveAmountElements();
     }
 }
 
+// 상품관리 탭 클릭
 document.querySelector('#product-purchase-menu').addEventListener('click',()=>{
     tabState.productManageEvent();
+    chargeContent.innerHTML = '';
     if(localStorage.getItem('productManageTab') === 'true'){
         printManageProduct.appendManageProduct();
+        viewState.productManageViewState();
+    }
+});
+
+// 잔돈 충전 탭 클릭
+document.querySelector('#vending-machine-manage-menu').addEventListener('click', ()=>{
+    tabState.chargeMoneyEvent();
+    manageContent.innerHTML = '';
+    if(viewState.getChargeMoneyViewState() === 'false' || viewState.getChargeMoneyViewState() === undefined){
+        printInputCharge.generateInputChargeElements();
+        printInputCharge.generateHaveAmountElements();
+        viewState.chargeMoneyViewState();
         
     }
 });
 
-document.querySelector('#vending-machine-manage-menu').addEventListener('click', ()=>{
-    tabState.chargeMoneyEvent();
-});
-
+// 상품 구매 탭 클릭
 document.querySelector('#product-add-menu').addEventListener('click', ()=>{
     tabState.purchaseProductEvent();
 });

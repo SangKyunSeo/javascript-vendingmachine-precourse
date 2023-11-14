@@ -1,7 +1,7 @@
-import {app} from './index.js'
+import {app} from '../index.js'
 import PrintProductList from './printProductList.js'
 import AddProductList from './addProductList.js'
-import PrintUtil from './printUtil.js'
+import PrintUtil from '../util/printUtil.js'
 
 const printProductList  = new PrintProductList();
 const addProductList = new AddProductList();

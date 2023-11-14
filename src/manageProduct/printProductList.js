@@ -1,4 +1,4 @@
-import PrintUtil from './printUtil.js'
+import PrintUtil from '../util/printUtil.js'
 import AddProductList from './addProductList.js'
 
 const addProductList = new AddProductList();

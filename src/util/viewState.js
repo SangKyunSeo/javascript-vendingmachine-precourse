@@ -15,7 +15,7 @@ export default class ViewState{
     }
 
     // 상품 구매 탭을 눌렀을 경우 view 상태 처리
-    purchateViewState(){
+    purchaseViewState(){
         localStorage.setItem('isGenerateManageProductSection', false);
         localStorage.setItem('isGenerateInputCharge', false);
         localStorage.setItem('isGeneratePurchase', true);

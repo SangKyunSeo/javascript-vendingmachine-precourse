@@ -1,11 +1,13 @@
-import PrintManageProduct from './printManageProduct.js'
-import TabState from './tabState.js'
-import {manageContent} from './printManageProduct.js'
-import {chargeContent} from './printInputCharge.js'
-import PrintInputCharge from './printInputCharge.js'
-import ViewState from './viewState.js'
-import PrintChargeCoinState from './printChargeCoinState.js'
-import VendingMachineState from './vendingMachineState.js'
+import PrintManageProduct from './manageProduct/printManageProduct.js'
+import TabState from './util/tabState.js'
+import {manageContent} from './manageProduct/printManageProduct.js'
+import {chargeContent} from './charge/printInputCharge.js'
+import {purchaseContent} from './purchase/printInputMoney.js'
+import PrintInputCharge from './charge/printInputCharge.js'
+import ViewState from './util/viewState.js'
+import PrintChargeCoinState from './charge/printChargeCoinState.js'
+import VendingMachineState from './charge/vendingMachineState.js'
+import PrintInputMoney from './purchase/printInputMoney.js'
 
 export const app = document.getElementById('app');
 const printManageProduct = new PrintManageProduct();
@@ -13,6 +15,7 @@ const printInputCharge = new PrintInputCharge();
 const viewState = new ViewState();
 const printChargeCoinState = new PrintChargeCoinState();
 const vendingMachineState = new VendingMachineState();
+const printInputMoney = new PrintInputMoney();
 
 let textNode = '';
 
@@ -69,6 +72,8 @@ window.onload = () => {
         printInputCharge.generateInputChargeElements();
         printInputCharge.generateHaveAmountElements();
         printChargeCoinState.printCurrentChargeCoin(vendingMachineState.generateCoinArray());
+    }else{
+        printInputMoney.generateInputMoneyElements();
     }
 }
 
@@ -76,9 +81,10 @@ window.onload = () => {
 document.querySelector('#product-purchase-menu').addEventListener('click',()=>{
     tabState.productManageEvent();
     chargeContent.innerHTML = '';
+    purchaseContent.innerHTML = '';
     if(localStorage.getItem('productManageTab') === 'true'){
         printManageProduct.appendManageProduct();
-        viewState.productManageViewState(vendingMachineState.get);
+        viewState.productManageViewState();
     }
 });
 
@@ -86,6 +92,7 @@ document.querySelector('#product-purchase-menu').addEventListener('click',()=>{
 document.querySelector('#vending-machine-manage-menu').addEventListener('click', ()=>{
     tabState.chargeMoneyEvent();
     manageContent.innerHTML = '';
+    purchaseContent.innerHTML = '';
     if(viewState.getChargeMoneyViewState() === 'false' || viewState.getChargeMoneyViewState() === undefined){
         printInputCharge.generateInputChargeElements();
         printInputCharge.generateHaveAmountElements();
@@ -97,5 +104,11 @@ document.querySelector('#vending-machine-manage-menu').addEventListener('click',
 // 상품 구매 탭 클릭
 document.querySelector('#product-add-menu').addEventListener('click', ()=>{
     tabState.purchaseProductEvent();
+    chargeContent.innerHTML = '';
+    manageContent.innerHTML = '';
+    if(viewState.getPurchaseViewState() === 'false' || viewState.getPurchaseViewState() === undefined){
+        printInputMoney.generateInputMoneyElements();
+        viewState.purchaseViewState();
+    }
 });
 

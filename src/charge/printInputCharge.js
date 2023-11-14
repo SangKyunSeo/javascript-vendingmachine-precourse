@@ -1,5 +1,5 @@
-import PrintUtil from './printUtil.js'
-import {app} from './index.js'
+import PrintUtil from '../util/printUtil.js'
+import {app} from '../index.js'
 import VendingMachineState from './vendingMachineState.js'
 import PrintChargeCoinState from './printChargeCoinState.js';
 

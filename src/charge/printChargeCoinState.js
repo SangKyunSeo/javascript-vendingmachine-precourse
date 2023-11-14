@@ -1,5 +1,5 @@
 import {chargeContent} from './printInputCharge.js'
-import PrintUtil from './printUtil.js'
+import PrintUtil from '../util/printUtil.js'
 import {coinId} from './vendingMachineState.js'
 
 const printUtil = new PrintUtil();

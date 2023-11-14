@@ -1,5 +1,6 @@
 import {chargeContent} from './printInputCharge.js'
 import PrintUtil from './printUtil.js'
+import {coinId} from './vendingMachineState.js'
 
 const printUtil = new PrintUtil();
 
@@ -49,17 +50,33 @@ export default class PrintChargeCoinState{
     generateChargeCoinTableContent(id, key, value){
         let tableTr = this.generatechargeCoinTableRow();
         tableTr.id = id;
-        tableTr.appendChild(printUtil.generateTd(key));
-        tableTr.appendChild(printUtil.generateTd(value));
+        tableTr.appendChild(printUtil.generateTd(key + '원'));
+        tableTr.appendChild(printUtil.generateTd(value === ''? '': value + '개'));
         return tableTr;
     }
 
     // 잔돈 충전 탭 클릭시 보유한 동전 출력
-    printCurrentChargeCoin(mapValue){
-        const keyArr = mapValue.keys;
-        console.log(keyArr);
+    printCurrentChargeCoin(coinMap){
+        let tableDiv = this.generateChargeCoinTableDiv('vending-machine-charge-coin-section');
+        let table = this.generateChargeCoinTable('vending-machine-charge-table');
+        let tableHead = this.generateChargeCoinTableHeader();
+        let tableRow = this.generatechargeCoinTableRow();
+        let tableBody = this.generateChargeCoinTableBody('vending-machine-charge-table-content');
+        tableDiv.appendChild(table);
+        table.appendChild(tableHead);
+        tableHead.appendChild(tableRow);
+        tableRow.append(this.generateChargeCoinTableTh('coin','동전'), this.generateChargeCoinTableTh('amount', '개수'));
+        for(let key of coinMap.keys()){
+            tableBody.append(this.generateChargeCoinTableContent(coinId[key], key, coinMap.get(key) === 0 ? '' : coinMap.get(key)));
+        }
+        table.appendChild(tableBody);
+        chargeContent.append(tableDiv)
     }
 
     // 충전하기 클릭 시 생성된 잔돈 출력
+    printReactiveChargeCoin(coinMap){
+        document.querySelector('#vending-machine-charge-coin-section').remove();
+        this.printCurrentChargeCoin(coinMap);
+    }
     
 }

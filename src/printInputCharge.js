@@ -1,9 +1,12 @@
 import PrintUtil from './printUtil.js'
 import {app} from './index.js'
 import VendingMachineState from './vendingMachineState.js'
+import PrintChargeCoinState from './printChargeCoinState.js';
 
 const printUtil = new PrintUtil();
 const vendingMachineState = new VendingMachineState();
+const printChargeCoinState = new PrintChargeCoinState();
+
 export const chargeContent = printUtil.generateDiv('charge-content');
 
 export default class PrintInputCharge{
@@ -50,6 +53,8 @@ export default class PrintInputCharge{
         document.querySelector('#vending-machine-charge-button').addEventListener('click',(event)=>{
             event.preventDefault();
             vendingMachineState.generateInputChargeEvent(document.querySelector('#vending-machine-charge-input').value, '#vending-machine-charge-amount');
+            document.querySelector('#vending-machine-charge-input').value = '';
+            printChargeCoinState.printReactiveChargeCoin(vendingMachineState.generateCoinArray());
         });
     }
 

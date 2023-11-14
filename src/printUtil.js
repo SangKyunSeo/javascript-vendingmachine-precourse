@@ -52,6 +52,7 @@ export default class PrintUtil{
     generateTable(name){
         const tableElement = document.createElement('table');
         tableElement.className = name;
+        tableElement.style.border = '1px solid';
         return tableElement;
     }
 
@@ -72,6 +73,7 @@ export default class PrintUtil{
         const textNode = document.createTextNode(text);
         tableTh.appendChild(textNode);
         tableTh.className = name;
+        tableTh.style.border = '1px solid';
         return tableTh;
     }
 
@@ -87,6 +89,7 @@ export default class PrintUtil{
         const tableTd = document.createElement('td');
         const textNode = document.createTextNode(value);
         tableTd.appendChild(textNode);
+        tableTd.style.border = '1px solid';
         return tableTd;
     }
 

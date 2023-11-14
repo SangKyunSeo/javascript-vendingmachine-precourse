@@ -5,12 +5,14 @@ import {chargeContent} from './printInputCharge.js'
 import PrintInputCharge from './printInputCharge.js'
 import ViewState from './viewState.js'
 import PrintChargeCoinState from './printChargeCoinState.js'
+import VendingMachineState from './vendingMachineState.js'
 
 export const app = document.getElementById('app');
 const printManageProduct = new PrintManageProduct();
 const printInputCharge = new PrintInputCharge();
 const viewState = new ViewState();
 const printChargeCoinState = new PrintChargeCoinState();
+const vendingMachineState = new VendingMachineState();
 
 let textNode = '';
 
@@ -66,6 +68,7 @@ window.onload = () => {
     }else if(localStorage.getItem('chargeMoneyTab') === 'true'){
         printInputCharge.generateInputChargeElements();
         printInputCharge.generateHaveAmountElements();
+        printChargeCoinState.printCurrentChargeCoin(vendingMachineState.generateCoinArray());
     }
 }
 
@@ -75,7 +78,7 @@ document.querySelector('#product-purchase-menu').addEventListener('click',()=>{
     chargeContent.innerHTML = '';
     if(localStorage.getItem('productManageTab') === 'true'){
         printManageProduct.appendManageProduct();
-        viewState.productManageViewState();
+        viewState.productManageViewState(vendingMachineState.get);
     }
 });
 
@@ -87,7 +90,7 @@ document.querySelector('#vending-machine-manage-menu').addEventListener('click',
         printInputCharge.generateInputChargeElements();
         printInputCharge.generateHaveAmountElements();
         viewState.chargeMoneyViewState();
-        // printChargeCoinState.printCurrentChargeCoin();
+        printChargeCoinState.printCurrentChargeCoin(vendingMachineState.generateCoinArray());
     }
 });
 

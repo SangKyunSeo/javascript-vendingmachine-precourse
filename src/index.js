@@ -8,6 +8,7 @@ import ViewState from './util/viewState.js'
 import PrintChargeCoinState from './charge/printChargeCoinState.js'
 import VendingMachineState from './charge/vendingMachineState.js'
 import PrintInputMoney from './purchase/printInputMoney.js'
+import PrintCurrentProduct from './purchase/printCurrentProduct.js'
 
 export const app = document.getElementById('app');
 const printManageProduct = new PrintManageProduct();
@@ -16,6 +17,7 @@ const viewState = new ViewState();
 const printChargeCoinState = new PrintChargeCoinState();
 const vendingMachineState = new VendingMachineState();
 const printInputMoney = new PrintInputMoney();
+const printCurrentProduct = new PrintCurrentProduct();
 
 let textNode = '';
 
@@ -74,6 +76,7 @@ window.onload = () => {
         printChargeCoinState.printCurrentChargeCoin(vendingMachineState.generateCoinArray());
     }else{
         printInputMoney.generateInputMoneyElements();
+        printCurrentProduct.generatePossibleBuyProduct();
     }
 }
 
@@ -108,6 +111,7 @@ document.querySelector('#product-add-menu').addEventListener('click', ()=>{
     manageContent.innerHTML = '';
     if(viewState.getPurchaseViewState() === 'false' || viewState.getPurchaseViewState() === undefined){
         printInputMoney.generateInputMoneyElements();
+        printCurrentProduct.generatePossibleBuyProduct();
         viewState.purchaseViewState();
     }
 });

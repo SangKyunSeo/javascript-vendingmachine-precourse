@@ -25,5 +25,9 @@ export default class PurchaseModel{
         return Number(JSON.parse(localStorage.getItem(id)));
     }
 
+    // 로컬 스토리지에 저장된 상품 목록 출력
+    getCurrentProductList(id){
+        return JSON.parse(localStorage.getItem(id));
+    }
 
 }

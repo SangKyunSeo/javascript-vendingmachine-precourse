@@ -41,6 +41,15 @@ export default class PrintUtil{
         return buttonElement;
     }
 
+    // button 클래스 요소 생성
+    generateButtonClass(text, name){
+        const buttonElement = document.createElement('button');
+        const textNode = document.createTextNode(text);
+        buttonElement.appendChild(textNode);
+        buttonElement.className = name;
+        return buttonElement;
+    }
+
     // span 요소 생성
     generateSpan(id){
         const spanElement = document.createElement('span');

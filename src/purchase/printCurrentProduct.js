@@ -81,5 +81,13 @@ export default class PrintCurrentProduct{
         thead.appendChild(ths);
         table.appendChild(tds);
         purchaseContent.appendChild(div);
+        buyClickEvent('.product-purchase-item');
+    }
+
+    buyClickEvent(name){
+        let buyElements = document.querySelectorAll(name);
+        buyElements.forEach((element) => {
+            
+        })
     }
 }

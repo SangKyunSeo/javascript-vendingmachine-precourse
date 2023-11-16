@@ -23,13 +23,13 @@ export default class printProductList{
         productStatusTableRow.appendChild(printUtil.generateTh('product-manage-name','상품명'));
         productStatusTableRow.appendChild(printUtil.generateTh('product-manage-price','가격'));
         productStatusTableRow.appendChild(printUtil.generateTh('product-manage-quantity','수량'));
+        productStatusTable.appendChild(this.generateManageProductStatusTableBody());
         return productStatusTable;
     }
 
     // 상품 현황 table body 생성
     generateManageProductStatusTableBody(){
-        const productStatusTableBody = printUtil.generateTbody('product-manage-table-content');
-        return productStatusTableBody;    
+        return printUtil.generateTbody('product-manage-table-content');
     }
 
     // 상품 현황 table td 생성
@@ -50,10 +50,11 @@ export default class printProductList{
 
     // 상품 추가시 테이블에 추가될 내용 출력
     generateAddedProduct(productStatusTableBody,productList){
-        productStatusTableBody.appendChild(printUtil.generateTr());
-        productStatusTableBody.append(this.generateManageProductStatusTableContent(productList.name));
-        productStatusTableBody.append(this.generateManageProductStatusTableContent(productList.price));
-        productStatusTableBody.append(this.generateManageProductStatusTableContent(productList.quantity));
+        const row = printUtil.generateTr();
+        row.append(this.generateManageProductStatusTableContent(productList.name));
+        row.append(this.generateManageProductStatusTableContent(productList.price));
+        row.append(this.generateManageProductStatusTableContent(productList.quantity));
+        productStatusTableBody.appendChild(row);
     }
 
     generateManageProductStruct(){

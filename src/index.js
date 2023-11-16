@@ -9,6 +9,10 @@ import PrintChargeCoinState from './charge/printChargeCoinState.js'
 import VendingMachineState from './charge/vendingMachineState.js'
 import PrintInputMoney from './purchase/printInputMoney.js'
 import PrintCurrentProduct from './purchase/printCurrentProduct.js'
+import PurchaseModel from './purchase/purchaseModel.js'
+import PrintChangeHBSection from './changes/printChangeHBSection.js'
+import PrintChangeCoinTableSection from './changes/printChangeCoinTableSection.js'
+import ChangesController from './changes/changesController.js'
 
 export const app = document.getElementById('app');
 const printManageProduct = new PrintManageProduct();
@@ -18,6 +22,10 @@ const printChargeCoinState = new PrintChargeCoinState();
 const vendingMachineState = new VendingMachineState();
 const printInputMoney = new PrintInputMoney();
 const printCurrentProduct = new PrintCurrentProduct();
+const purchaseModel = new PurchaseModel();
+const printChangeHBSection = new PrintChangeHBSection();
+const printChangeCoinTableSection = new PrintChangeCoinTableSection();
+const changesController = new ChangesController();
 
 let textNode = '';
 
@@ -77,6 +85,11 @@ window.onload = () => {
     }else{
         printInputMoney.generateInputMoneyElements();
         printCurrentProduct.generatePossibleBuyProduct();
+        purchaseModel.buyClickEvent('.purchase-button'); 
+        printChangeHBSection.generateChangeHeaderAndButton();
+        printChangeCoinTableSection.generateChangeTableHeaderAndDiv();
+        changesController.changesCoinClickEvent('coin-return-button');
+        changesController.printInitCoinsTable('.coin-return-table');
     }
 }
 
@@ -112,6 +125,11 @@ document.querySelector('#product-add-menu').addEventListener('click', ()=>{
     if(viewState.getPurchaseViewState() === 'false' || viewState.getPurchaseViewState() === undefined){
         printInputMoney.generateInputMoneyElements();
         printCurrentProduct.generatePossibleBuyProduct();
+        purchaseModel.buyClickEvent('.purchase-button');
+        printChangeHBSection.generateChangeHeaderAndButton();
+        printChangeCoinTableSection.generateChangeTableHeaderAndDiv();
+        changesController.changesCoinClickEvent('coin-return-button');
+        changesController.printInitCoinsTable('.coin-return-table');
         viewState.purchaseViewState();
     }
 });
